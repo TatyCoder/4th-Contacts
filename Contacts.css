@@ -1,0 +1,67 @@
+html {
+    font-family: sans-serif;
+  }
+  
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: rgb(100, 129, 211);
+  }
+  
+  #form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: rgb(72, 94, 156);
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.178);
+    border-radius: 10px;
+  }
+  
+  #addNewContactButton {
+      font-weight: bold;
+      color: rgb(100, 129, 209);
+      border-radius: 10px;
+      border-color: rgb(112, 135, 201);
+  }
+  
+  #cancelUpdateContactButton {
+      font-weight: bold;
+      color: rgb(100, 129, 209);
+      border-radius: 10px;
+      border-color: rgb(112, 135, 201); 
+  }
+  
+  #saveUpdateContactButton {
+      font-weight: bold;
+      color: rgb(100, 129, 209);
+      border-radius: 10px;
+      border-color: rgb(112, 135, 201);  
+  }
+  
+  .deleteContactButton {
+      font-weight: bold;
+      color: rgb(116, 163, 233);
+      border-radius: 10px;
+      border-color: rgb(103, 155, 235);  
+  }
+  
+  .updateContactButton {
+      font-weight: bold;
+      color: rgb(116, 163, 233);
+      border-radius: 10px;
+      border-color: rgb(103, 155, 235);  
+  }
+  
+  #contacts {
+    color: rgb(94, 114, 168);
+  }
+  
+  .contact-element {
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.178);
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
