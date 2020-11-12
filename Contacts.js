@@ -1,10 +1,16 @@
 class Contact {
+    id;
     name;
     address;
     phone;
     isNewContact = false;
 
-    constructor(name /* String */ , address /* Address object */ , phone /* String */ ) {
+    constructor(id /* Number */, name /* String */, address /* Address object */, phone /* String */) {
+        if (id === null) {
+            this.id = Math.random().toString()
+        } else {
+            this.id = id
+        };
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -58,9 +64,9 @@ class Contact {
         if (this.isNewContact === true) {
             let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/addContact', {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify(this),
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
             });
 
@@ -68,13 +74,23 @@ class Contact {
             console.log(contactJson);
             contacts.push(this);
             this.isNewContact = false;
+        } else {
+            let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/updateContactByID', {
+            method: 'POST',
+            body: JSON.stringify(this),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            });
+            
+            const contactJson = await response.json();
+            console.log(contactJson);
         }
 
         showAllContacts();
     }
 
     render() {
-        const randomID = Math.random().toString();
         const newContactElement = document.createElement('div');
         const addressHtml = this.address.render();
 
@@ -83,17 +99,17 @@ class Contact {
         <b>${this.name}</b>
          ${addressHtml}
         <p>${this.phone}</p>
-        <button class= "deleteContactButton" id="deleteContactButton${randomID}">Delete</button>
-        <button class="updateContactButton" id="updateContactButton${randomID}">Update</button>
+        <button class= "deleteContactButton" id="deleteContactButton${this.id}">Delete</button>
+        <button class="updateContactButton" id="updateContactButton${this.id}">Update</button>
       </div>
     `;
         const contactsList = document.getElementById('contacts');
         contactsList.append(newContactElement);
 
-        const updateContactButton = document.getElementById('updateContactButton' + randomID);
+        const updateContactButton = document.getElementById('updateContactButton' + this.id);
         updateContactButton.addEventListener('click', this.renderUpdate.bind(this));
 
-        const deleteContactButton = document.getElementById('deleteContactButton' + randomID);
+        const deleteContactButton = document.getElementById('deleteContactButton' + this.id);
         deleteContactButton.addEventListener('click', deleteContactHandler.bind(null, this.name));
     }
 }

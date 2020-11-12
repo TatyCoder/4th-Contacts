@@ -5,6 +5,7 @@ async function fetchContacts() {
     const contactJson = await response.json();
     for (const cj of contactJson) {
         const myContact = new Contact(
+            cj.id,
             cj.name,
             new Address(cj.address.street, cj.address.city, cj.address.state, cj.address.zip),
             cj.phone
@@ -16,7 +17,7 @@ async function fetchContacts() {
 }
 
 const addNewContactHandler = () => {
-    const c = new Contact('', new Address('', '', '', ''), '');
+    const c = new Contact(null, '', new Address('', '', '', ''), '');
     c.isNewContact = true;
     c.renderUpdate();
 }
@@ -46,7 +47,7 @@ const showAllContacts = () => {
     }
 }
 
-const removeAllChildNodes = (nodeID /* string */ ) => {
+const removeAllChildNodes = (nodeID /* String */ ) => {
     const parent = document.getElementById(nodeID);
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
