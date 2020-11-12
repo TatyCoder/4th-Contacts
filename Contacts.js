@@ -4,7 +4,7 @@ class Contact {
     phone;
     isNewContact = false;
 
-    constructor(name /* String */, address /* Address object */, phone /* String */) {
+    constructor(name /* String */ , address /* Address object */ , phone /* String */ ) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -38,16 +38,16 @@ class Contact {
         const updateForm = document.getElementById('updateForm');
         updateForm.append(updateContactElement);
 
-// Making cancelUpdateContactButton works:
+        // Making cancelUpdateContactButton works:
         const cancelUpdateContactButton = document.getElementById('cancelUpdateContactButton');
         cancelUpdateContactButton.addEventListener('click', showAllContacts);
 
-// Making saveUpdateContactButton works:
+        // Making saveUpdateContactButton works:
         const saveUpdateContactButton = document.getElementById('saveUpdateContactButton');
         saveUpdateContactButton.addEventListener('click', this.saveUpdatedContactHandler);
     }
-    
-    saveUpdatedContactHandler = () => {
+
+    saveUpdatedContactHandler = async () => {
         this.name = document.getElementById('name').value;
         this.address.street = document.getElementById('street').value;
         this.address.city = document.getElementById('city').value;
@@ -56,6 +56,16 @@ class Contact {
         this.phone = document.getElementById('phone').value;
 
         if (this.isNewContact === true) {
+            let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/addContact', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+
+            const contactJson = await response.json();
+            console.log(contactJson);
             contacts.push(this);
             this.isNewContact = false;
         }
