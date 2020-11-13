@@ -110,6 +110,6 @@ class Contact {
         updateContactButton.addEventListener('click', this.renderUpdate.bind(this));
 
         const deleteContactButton = document.getElementById('deleteContactButton' + this.id);
-        deleteContactButton.addEventListener('click', deleteContactHandler.bind(null, this.name));
+        deleteContactButton.addEventListener('click', deleteContactHandler.bind(null, this.id));
     }
 }

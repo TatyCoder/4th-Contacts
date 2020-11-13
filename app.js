@@ -1,7 +1,9 @@
 let contacts = [];
 
 async function fetchContacts() {
-    let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/getAllContacts', {method: 'GET'});
+    let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/getAllContacts', {
+        method: 'GET'
+    });
     const contactJson = await response.json();
     for (const cj of contactJson) {
         const myContact = new Contact(
@@ -22,10 +24,21 @@ const addNewContactHandler = () => {
     c.renderUpdate();
 }
 
-const deleteContactHandler = (name) => {
+const deleteContactHandler = async (id) => {
     let contactIndex = 0;
+    let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/deleteContactByID', {
+        method: 'POST',
+        body: JSON.stringify(),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const contactJson = await response.json();
+    console.log(contactJson);
+
     for (const contact of contacts) {
-        if (contact.name === name) {
+        if (contact.id === id) {
             break;
         }
         contactIndex++;
@@ -34,7 +47,6 @@ const deleteContactHandler = (name) => {
     const listRoot = document.getElementById('contacts');
     listRoot.children[contactIndex].remove();
 
-    console.log(name);
 }
 
 const showAllContacts = () => {
