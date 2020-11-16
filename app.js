@@ -1,6 +1,7 @@
 let contacts = [];
 
 async function fetchContacts() {
+    contacts = [];
     let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/getAllContacts', {
         method: 'GET'
     });
@@ -24,11 +25,11 @@ const addNewContactHandler = () => {
     c.renderUpdate();
 }
 
-const deleteContactHandler = async (id) => {
+const deleteContactHandler = async (contact) => {
     let contactIndex = 0;
     let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/deleteContactByID', {
         method: 'POST',
-        body: JSON.stringify(),
+        body: JSON.stringify(contact),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -37,16 +38,7 @@ const deleteContactHandler = async (id) => {
     const contactJson = await response.json();
     console.log(contactJson);
 
-    for (const contact of contacts) {
-        if (contact.id === id) {
-            break;
-        }
-        contactIndex++;
-    }
-    contacts.splice(contactIndex, 1);
-    const listRoot = document.getElementById('contacts');
-    listRoot.children[contactIndex].remove();
-
+   fetchContacts();
 }
 
 const showAllContacts = () => {
@@ -66,7 +58,7 @@ const removeAllChildNodes = (nodeID /* String */ ) => {
     }
 }
 
-fetchContacts();
+fetchContacts();  // This is the entry point of the app: first line of execution.
 
 const addNewContactButton = document.getElementById('addNewContactButton');
 addNewContactButton.addEventListener('click', addNewContactHandler);
