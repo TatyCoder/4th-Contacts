@@ -62,7 +62,7 @@ class Contact {
         this.phone = document.getElementById('phone').value;
 
         if (this.isNewContact === true) {
-            let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/addContact', {
+            let response = await fetch('https://phone-contacts-service-cgpil.ondigitalocean.app/addContact', {
                 method: 'POST',
                 body: JSON.stringify(this),
                 headers: {
@@ -75,7 +75,7 @@ class Contact {
             contacts.push(this);
             this.isNewContact = false;
         } else {
-            let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/updateContactByID', {
+            let response = await fetch('https://phone-contacts-service-cgpil.ondigitalocean.app/updateContactByID', {
             method: 'POST',
             body: JSON.stringify(this),
             headers: {

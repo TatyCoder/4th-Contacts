@@ -2,7 +2,7 @@ let contacts = [];
 
 async function fetchContacts() {
     contacts = [];
-    let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/getAllContacts', {
+    let response = await fetch('https://phone-contacts-service-cgpil.ondigitalocean.app/getAllContacts', {
         method: 'GET'
     });
     const contactJson = await response.json();
@@ -27,7 +27,7 @@ const addNewContactHandler = () => {
 
 const deleteContactHandler = async (contact) => {
     let contactIndex = 0;
-    let response = await fetch('https://phone-contacts-service-yckhe.ondigitalocean.app/deleteContactByID', {
+    let response = await fetch('https://phone-contacts-service-cgpil.ondigitalocean.app/deleteContactByID', {
         method: 'POST',
         body: JSON.stringify(contact),
         headers: {
